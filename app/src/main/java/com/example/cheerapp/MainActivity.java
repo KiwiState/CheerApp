@@ -11,11 +11,4 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-
-    // Prueba de conexión hacia base de datos.
-    /*public static void main(String[] args){
-
-        ConnectionClass conexion = new ConnectionClass();
-        conexion.Conector();
-    }*/
 }
