@@ -19,12 +19,24 @@
         android:fontFamily="@font/fredo"
         android:textColor="#000000"
         app:backgroundTint="@null"
-        android:alpha="0.65"
+        android:alpha="65"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.888" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="246dp"
+        android:layout_height="72dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.244" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
