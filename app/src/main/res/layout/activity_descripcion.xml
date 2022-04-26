@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background">
+
+    <Button
+        android:id="@+id/btnD1"
+        android:layout_width="130dp"
+        android:layout_height="49dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginBottom="200dp"
+        android:background="@drawable/custom_button"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/btnD3"
+        android:layout_width="130dp"
+        android:layout_height="49dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="200dp"
+        android:layout_marginRight="60dp"
+        android:text="Button"
+        android:background="@drawable/custom_button"/>
+
+    <Button
+        android:id="@+id/btnD4"
+        android:layout_width="130dp"
+        android:layout_height="49dp"
+        android:layout_alignParentBottom="true"
+
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="125dp"
+        android:background="@drawable/custom_button"
+        android:text="Back" />
+
+
+    <EditText
+        android:id="@+id/editTextTextMultiLine"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/custom_button"
+        android:ems="10"
+        android:hint="Escriba como se siente"
+        android:inputType="textMultiLine"
+        android:textAlignment="center" />
+
+</RelativeLayout>
