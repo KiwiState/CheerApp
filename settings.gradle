@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "CheerApp"
 include ':app'
+include ':app:lib'
