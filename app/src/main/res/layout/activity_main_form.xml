@@ -31,6 +31,7 @@
                 android:textStyle="bold"/>
 
             <RatingBar
+                android:id="@+id/rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
@@ -51,11 +52,10 @@
             android:layout_height="49dp"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
             android:layout_marginBottom="100dp"
             android:background="@drawable/custom_button"
-            android:text="Guardar"
-            android:onClick="save"/>
+            android:onClick="save"
+            android:text="Guardar" />
 
         <Button
             android:id="@+id/btns_load"
@@ -66,8 +66,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="25dp"
             android:background="@drawable/custom_button"
-            android:text="load"
-            android:onClick="load"/>
+            android:onClick="load"
+            android:text="load" />
 
 
         <EditText
