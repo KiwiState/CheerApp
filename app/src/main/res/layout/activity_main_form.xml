@@ -54,7 +54,6 @@
             android:layout_centerInParent="true"
             android:layout_marginBottom="100dp"
             android:background="@drawable/custom_button"
-            android:onClick="save"
             android:text="Guardar" />
 
         <Button
@@ -63,10 +62,8 @@
             android:layout_height="49dp"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
             android:layout_marginBottom="25dp"
             android:background="@drawable/custom_button"
-            android:onClick="load"
             android:text="load" />
 
 

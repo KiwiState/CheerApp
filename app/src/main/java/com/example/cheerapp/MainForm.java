@@ -48,7 +48,10 @@ public class MainForm extends AppCompatActivity {
 
         loadData();//crea el array List si no existe en la base de datos o recarga el array list con los previos guardados
         //ListaE.add(new JsonEmotion("me siento muy triste",0));
-        Log.d(TAG, "onCreate: desc: " + ListaE.get(0).getDesc()+" nivel de emocion: "+ListaE.get(0).getnEmotion());
+        for(int i = 0; i < ListaE.size(); i++){
+            Log.d(TAG, "onCreate: desc: " + ListaE.get(i).getDesc()+" nivel de emocion: "+ListaE.get(i).getnEmotion());
+        }
+
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
