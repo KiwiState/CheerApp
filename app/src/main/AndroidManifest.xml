@@ -14,10 +14,10 @@
         android:theme="@style/Theme.CheerApp"
         android:usesCleartextTraffic="true" >
         <activity
-            android:name=".vistas.MainActivity"
+            android:name=".vistas.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".vistas.LoginActivity"
+            android:name=".vistas.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

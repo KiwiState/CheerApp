@@ -1,9 +1,12 @@
 package com.example.cheerapp.vistas;
 
+import com.example.cheerapp.clases.*;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cheerapp.R;
+import com.example.cheerapp.clases.UsuarioLocal;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +31,11 @@ public class LoginActivity extends AppCompatActivity {
     EditText edTextUser;
     EditText edTextPass;
     Button btnLogin;
+
+    UsuarioLocal usuarioLocal;
+
+    /* String que contiene los datos de auth
+    public static String PREFS_NAME="MyPrefsFile";*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +55,9 @@ public class LoginActivity extends AppCompatActivity {
                 validarUser("http://192.168.1.94:80/login.php");
             }
         });
+
+        usuarioLocal = new UsuarioLocal(this);
+
     }
 
     private void validarUser(String URL){
@@ -59,6 +71,21 @@ public class LoginActivity extends AppCompatActivity {
 
 
                 if(response.equals("USUARIO ENCONTRADO\t  ")){
+
+                    /* // Parámetros que editan el PREFS_NAME para indicar que hay una cuenta logeada.
+                    SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("Usuario", edTextUser.getText().toString());
+                    editor.putBoolean("estaLog", true);
+                    editor.commit();
+
+                    */
+
+                    Usuario usuario = new Usuario(edTextUser.getText().toString(), edTextPass.getText().toString());
+                    usuarioLocal.setDatosUser(usuario);
+                    usuarioLocal.logear(true);
+
+
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
 
