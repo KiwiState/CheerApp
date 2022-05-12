@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class MainForm extends AppCompatActivity {
@@ -65,7 +66,7 @@ public class MainForm extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveData();
-                Toast.makeText(MainForm.this,"funko pop ",Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(MainForm.this,"funko pop ",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -74,7 +75,7 @@ public class MainForm extends AppCompatActivity {
     private void saveData(){
         mEditText =  findViewById(R.id.edittext_desc);
         ratingBar = findViewById(R.id.rating);
-        insertItem(mEditText.getText().toString(),ratingBar.getRating());
+        insertItem(mEditText.getText().toString(),ratingBar.getRating(),LocalDate.now());
 
         SharedPreferences sharedPreferences = getSharedPreferences("shared preference",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -95,8 +96,8 @@ public class MainForm extends AppCompatActivity {
         }
     }
 
-    private void insertItem(String arg1, float arg2) {
-        ListaE.add(new JsonEmotion(arg1, arg2));
+    private void insertItem(String arg1, float arg2, LocalDate arg3) {
+        ListaE.add(new JsonEmotion(arg1, arg2, arg3));
     }
 
     /// abajo es internal storage
@@ -162,6 +163,7 @@ public class MainForm extends AppCompatActivity {
         dialog.show();
 
     }
+
 
 
 }
