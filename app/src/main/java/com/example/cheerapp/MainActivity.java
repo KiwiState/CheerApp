@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import java.time.LocalDate;
@@ -32,8 +33,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        patronEm();
+        ListaE = new ArrayList<>();
         btn_emo = findViewById(R.id.btn_emotion);
+        LocalDate today = LocalDate.now();
+        System.out.println("Fecha de hoy " + today);
+        Log.d("MainForm","Fecha de hoy" + today);
+        patronEm();
+
         btn_emo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -49,9 +55,7 @@ public class MainActivity extends AppCompatActivity {
         int counterD = 0;                                                                            //Contadores de Dia
         int sumE = 0;                                                                                //Suma de todos los valore de la emociones
         int promE = 0;
-                                                                                                     //Toast.makeText(MainActivity.this,"Diffrence between dates is : "+diffDays + "days",Toast.LENGTH_SHORT).show();
-
-        ListaE = new ArrayList<>();                                                                  // se crea el array **solo testeo**
+                                                                                                     //Toast.makeText(MainActivity.this,"Diffrence between dates is : "+diffDays + "days",Toast.LENGTH_SHORT).show();// se crea el array **solo testeo**
         LocalDate fecha = LocalDate.now();                                                           // se guarda la fecha de hoy
 
         Collections.reverse(ListaE);                                                                 //dara vuelta el array List para leer de el ultimo a el primero
@@ -75,12 +79,14 @@ public class MainActivity extends AppCompatActivity {
             if(promE <5){
                 //dar consejos y numeros de ayuda
                 //esta animicamente el mal usuario :c
+                Toast.makeText(MainActivity.this,"El usuario presenta un nivel animico bajo",Toast.LENGTH_SHORT).show();
             }
             if (promE <= 2.5){
                 // dar formulario DBI
                 //esta critico el usuario >;c #noBoobis
             }
-
+        } else {
+            Toast.makeText(MainActivity.this,"No hay suficientes datos para hacer un patron",Toast.LENGTH_SHORT).show();
         }
         Collections.reverse(ListaE);                                                                //revierte a estado original el orden del array
     }

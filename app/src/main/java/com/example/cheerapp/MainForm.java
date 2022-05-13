@@ -50,8 +50,9 @@ public class MainForm extends AppCompatActivity {
         loadData();//crea el array List si no existe en la base de datos o recarga el array list con los previos guardados
         //ListaE.add(new JsonEmotion("me siento muy triste",0));
         for(int i = 0; i < ListaE.size(); i++){
-            Log.d(TAG, "onCreate: desc: " + ListaE.get(i).getDesc()+" nivel de emocion: "+ListaE.get(i).getnEmotion());
+            Log.d(TAG, "onCreate: desc: " + ListaE.get(i).getDesc()+" nivel de emocion: "+ListaE.get(i).getnEmotion() + " Fecha :" +ListaE.get(i).getFecha());
         }
+
 
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -75,7 +76,7 @@ public class MainForm extends AppCompatActivity {
     private void saveData(){
         mEditText =  findViewById(R.id.edittext_desc);
         ratingBar = findViewById(R.id.rating);
-        insertItem(mEditText.getText().toString(),ratingBar.getRating(),LocalDate.now());
+        insertItem(mEditText.getText().toString(),ratingBar.getRating());
 
         SharedPreferences sharedPreferences = getSharedPreferences("shared preference",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -96,8 +97,9 @@ public class MainForm extends AppCompatActivity {
         }
     }
 
-    private void insertItem(String arg1, float arg2, LocalDate arg3) {
-        ListaE.add(new JsonEmotion(arg1, arg2, arg3));
+    private void insertItem(String arg1, float arg2 ) {
+        LocalDate today = LocalDate.now();
+        ListaE.add(new JsonEmotion(arg1, arg2,today));
     }
 
     /// abajo es internal storage
