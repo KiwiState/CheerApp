@@ -14,31 +14,31 @@
         android:id="@+id/btn_emotion"
         android:layout_width="130dp"
         android:layout_height="49dp"
-        android:layout_weight="1"
-        android:background="@drawable/custom_button"
-        android:text="Emocion"
-        android:fontFamily="@font/fredo"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="64dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="64dp"
+        android:layout_weight="1"
+        android:alpha="65"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/fredo"
+        android:text="Emocion"
         android:textColor="#000000"
-        app:backgroundTint="@null"
-        android:alpha="65" />
-    <!--
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recyler_view"
-        tools:listitem="@layout/item_main" />
+        app:backgroundTint="@null" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/fb_add"
-        android:layout_margin="16dp"
+    <Button
+        android:id="@+id/btn_historial"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:src="@android:drawable/ic_input_add"/>
-        -->
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1"
+        android:alpha="65"
+        android:background="@drawable/custom_button" />
+
+
 
 </RelativeLayout>
