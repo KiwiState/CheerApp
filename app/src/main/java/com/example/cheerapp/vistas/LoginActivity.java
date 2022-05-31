@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -31,11 +32,9 @@ public class LoginActivity extends AppCompatActivity {
     EditText edTextUser;
     EditText edTextPass;
     Button btnLogin;
+    TextView tViewUser, tViewPassword;
 
     UsuarioLocal usuarioLocal;
-
-    /* String que contiene los datos de auth
-    public static String PREFS_NAME="MyPrefsFile";*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +44,45 @@ public class LoginActivity extends AppCompatActivity {
         edTextUser = (EditText) (findViewById(R.id.edTxtUser));
         edTextPass = (EditText) (findViewById(R.id.edTxtPassword));
         btnLogin = (Button) (findViewById(R.id.btnLogin));
+        tViewUser = (TextView) (findViewById(R.id.txtVUser));
+        tViewPassword = (TextView) (findViewById(R.id.txtVPassword));
+
+        edTextUser.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    if(edTextUser.getText().toString().equals("")){
+                        tViewUser.setVisibility(View.VISIBLE);
+                    }
+                }else{
+                    clearUserTextWarning();
+                }
+            }
+        });
+
+
+        edTextPass.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus) {
+                    if (edTextPass.getText().toString().equals("")) {
+                        tViewPassword.setVisibility(View.VISIBLE);
+                    }
+                }else{
+                    clearPasswordTextWarning();
+                }
+            }
+        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                // Cambiar dirección ip según dónde tenga hosteado el Web Service.
+                if(validarCampos()){
+                    // Cambiar dirección ip según dónde tenga hosteado el Web Service.
+                    validarUser("http://144.22.35.197/login.php");
+                }
 
-                validarUser("http://192.168.1.94:80/login.php");
             }
         });
 
@@ -69,17 +99,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
 
+                // La respuesta del PHP agrega espacios después del String, por eso se aplica un TRIM()
+                response=response.trim();
 
-                if(response.equals("USUARIO ENCONTRADO\t  ")){
 
-                    /* // Parámetros que editan el PREFS_NAME para indicar que hay una cuenta logeada.
-                    SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("Usuario", edTextUser.getText().toString());
-                    editor.putBoolean("estaLog", true);
-                    editor.commit();
+                if(response.equals("USUARIO ENCONTRADO")){
 
-                    */
 
                     Usuario usuario = new Usuario(edTextUser.getText().toString(), edTextPass.getText().toString());
                     usuarioLocal.setDatosUser(usuario);
@@ -90,13 +115,14 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
 
 
-                }else if(response.equals("USUARIO NO ENCONTRADO\t  ")){
+                }else if(response.equals("USUARIO NO ENCONTRADO")){
                     Toast.makeText(LoginActivity.this, "Datos erróneos", Toast.LENGTH_SHORT).show();
 
 
                 }else{
 
                     Toast.makeText(LoginActivity.this, "NO RESPONSE FROM PHP", Toast.LENGTH_SHORT).show();
+                    System.out.println(response);
 
 
 
@@ -125,5 +151,44 @@ public class LoginActivity extends AppCompatActivity {
 
 
         requestQueue.add(stringRequest);
+    }
+
+    private boolean validarCampos(){
+
+        boolean validador = true;
+
+        if(edTextUser.getText().toString().equals("")){
+
+            tViewUser.setVisibility(View.VISIBLE);
+            validador = false;
+
+
+        }else{
+
+            tViewUser.setVisibility(View.INVISIBLE);
+
+        }
+
+
+        if(edTextPass.getText().toString().equals("")){
+
+            tViewPassword.setVisibility(View.VISIBLE);
+            validador = false;
+
+        }else{
+            tViewPassword.setVisibility(View.INVISIBLE);
+
+        }
+
+        return validador;
+
+    }
+
+    private void clearUserTextWarning(){
+        tViewUser.setVisibility(View.INVISIBLE);
+    }
+
+    private void clearPasswordTextWarning(){
+        tViewPassword.setVisibility(View.INVISIBLE);
     }
 }

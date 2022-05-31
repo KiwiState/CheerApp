@@ -4,7 +4,7 @@ import com.example.cheerapp.clases.Usuario;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
+//Clase para almacenar usuarios en local.
 public class UsuarioLocal {
 
     private static final String NOMBRE_PREF="datosUsuario";
