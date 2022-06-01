@@ -1,5 +1,12 @@
 package com.example.cheerapp.vistas;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.cheerapp.clases.Usuario;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,73 +17,84 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cheerapp.R;
 import com.example.cheerapp.clases.UsuarioLocal;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 
     Button btnLoginView;
-    TextView tVDatos;
+    TextView txtVNombreSaludo;
     UsuarioLocal usuarioLocal;
-
-    private static int SPLASH_TIME_OUT=3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         usuarioLocal = new UsuarioLocal(this);
 
-        tVDatos = (TextView) findViewById(R.id.tViewDatos);
-
-        // Handler que controla si está logeado un usuario.
-        /*new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME,0);
-                boolean estaLog = sharedPreferences.getBoolean("estaLog", false);
-
-                // Si no está logeado, se abre la vista de login.
-                if(!estaLog){
-                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-
-
-                // Si está logeado, hace lo siguiente:
-                }else{
-
-                    Toast.makeText(MainActivity.this, sharedPreferences.getString("Usuario", null), Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        }, SPLASH_TIME_OUT=0);*/
-
-        btnLoginView=(Button) (findViewById(R.id.btnLoginView));
+        txtVNombreSaludo = (TextView) (findViewById(R.id.txtVNombreSaludo));
+        btnLoginView = (Button) (findViewById(R.id.btnLoginView));
 
         btnLoginView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 deslogear();
             }
         });
 
-        if(autentificar()==true){
-            mostrarDatosUsuario();
-        }else{
+        if(!autentificar()){
+
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
+
         }
 
+        fetchNombre("http://144.22.35.197/fetchNombre.php");
 
 
 
+    }
+
+    private void fetchNombre(String URL){
+        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                response = response.trim();
+
+                if (!response.equals("")) {
+
+                    txtVNombreSaludo.setText(response.toString() + "!");
+                } else {
+                    System.out.println(response);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Usuario usuario = usuarioLocal.getDatosUser();
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("correo", usuario.emailUsuario);
+                return params;
+            }
+        };
+
+        requestQueue.add(stringRequest);
     }
 
 
@@ -86,11 +104,7 @@ public class MainActivity extends AppCompatActivity {
         return usuarioLocal.getLoggedUser();
     }
 
-    private void mostrarDatosUsuario(){
 
-        Usuario usuario = usuarioLocal.getDatosUser();
-        tVDatos.setText(usuario.emailUsuario);
-    }
 
 
 

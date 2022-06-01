@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText edTextUser;
     EditText edTextPass;
     Button btnLogin;
-    TextView tViewUser, tViewPassword;
+    TextView tViewUser, tViewPassword, txtVToRegister;
 
     UsuarioLocal usuarioLocal;
 
@@ -46,6 +46,15 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) (findViewById(R.id.btnLogin));
         tViewUser = (TextView) (findViewById(R.id.txtVUser));
         tViewPassword = (TextView) (findViewById(R.id.txtVPassword));
+        txtVToRegister = (TextView) (findViewById(R.id.txtVGoToRegister));
+
+        txtVToRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                finish();
+            }
+        });
 
         edTextUser.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -161,14 +170,9 @@ public class LoginActivity extends AppCompatActivity {
 
             tViewUser.setVisibility(View.VISIBLE);
             validador = false;
-
-
         }else{
-
             tViewUser.setVisibility(View.INVISIBLE);
-
         }
-
 
         if(edTextPass.getText().toString().equals("")){
 
@@ -177,7 +181,6 @@ public class LoginActivity extends AppCompatActivity {
 
         }else{
             tViewPassword.setVisibility(View.INVISIBLE);
-
         }
 
         return validador;
