@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnLoginView;
+    Button btnLoginView, btnEmotionTest;
     TextView txtVNombreSaludo;
     UsuarioLocal usuarioLocal;
 
@@ -41,6 +41,16 @@ public class MainActivity extends AppCompatActivity {
 
         txtVNombreSaludo = (TextView) (findViewById(R.id.txtVNombreSaludo));
         btnLoginView = (Button) (findViewById(R.id.btnLoginView));
+        btnEmotionTest = (Button) (findViewById(R.id.bttnEmocionTest));
+
+        btnEmotionTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(MainActivity.this, EmotionTest.class));
+                finish();
+            }
+        });
 
         btnLoginView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,8 +70,6 @@ public class MainActivity extends AppCompatActivity {
 
         fetchNombre("http://144.22.35.197/fetchNombre.php");
 
-
-
     }
 
     private void fetchNombre(String URL){
@@ -71,10 +79,10 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 response = response.trim();
 
-                if (!response.equals("")) {
+                if(!response.equals("")){
 
                     txtVNombreSaludo.setText(response.toString() + "!");
-                } else {
+                }else{
                     System.out.println(response);
                 }
             }
@@ -89,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Usuario usuario = usuarioLocal.getDatosUser();
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("correo", usuario.emailUsuario);
+                params.put("correoNombre", usuario.emailUsuario);
                 return params;
             }
         };
@@ -98,16 +106,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     private boolean autentificar(){
         return usuarioLocal.getLoggedUser();
     }
-
-
-
-
-
 
     public void deslogear(){
 

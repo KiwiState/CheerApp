@@ -22,6 +22,8 @@ import com.example.cheerapp.R;
 import com.example.cheerapp.clases.Usuario;
 import com.example.cheerapp.clases.UsuarioLocal;
 
+import org.json.JSONArray;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,14 +35,14 @@ public class SafetyNumberActivity extends AppCompatActivity {
     TextView txtVOmitirSN1;
     Button bttnAgregarSN1;
 
-    String numeroUser;
+    String numeroUser = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_safety_number);
-        numeroUser = fetchNumeroUser("http://144.22.35.197/fetchNumero.php");
         usuarioLocal = new UsuarioLocal(this);
+
 
         edTxtNombreSN1 = (EditText) (findViewById(R.id.edTxtNombrePrimerSN));
         edTxtSN1 = (EditText) (findViewById(R.id.edTxtNroPrimerSN));
@@ -61,14 +63,15 @@ public class SafetyNumberActivity extends AppCompatActivity {
         bttnAgregarSN1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                fetchNumeroUser("http://144.22.35.197/fetchNumero.php");
                 agregarSN("http://144.22.35.197/addSN.php");
             }
         });
+
     }
 
 
-    private void agregarSN(String URL){
+    private void agregarSN(String URL) {
         RequestQueue requestQueue = Volley.newRequestQueue(SafetyNumberActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
@@ -91,7 +94,7 @@ public class SafetyNumberActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(SafetyNumberActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
-        }){
+        }) {
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -109,7 +112,9 @@ public class SafetyNumberActivity extends AppCompatActivity {
 
     }
 
-    private String fetchNumeroUser(String URL){
+
+    private void fetchNumeroUser(String URL) {
+
 
         RequestQueue requestQueue = Volley.newRequestQueue(SafetyNumberActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
@@ -117,7 +122,7 @@ public class SafetyNumberActivity extends AppCompatActivity {
             public void onResponse(String response) {
 
                 response = response.trim();
-                numeroUser = response;
+                numeroUser=response;
 
             }
         }, new Response.ErrorListener() {
@@ -125,9 +130,9 @@ public class SafetyNumberActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
                 Toast.makeText(SafetyNumberActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
-                numeroUser="0";
+
             }
-        }){
+        }) {
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -139,6 +144,11 @@ public class SafetyNumberActivity extends AppCompatActivity {
         };
 
         requestQueue.add(stringRequest);
-        return numeroUser;
+
+
+
     }
+
+
+
 }

@@ -14,6 +14,9 @@
         android:theme="@style/Theme.CheerApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".vistas.EmotionTest"
+            android:exported="false" />
+        <activity
             android:name=".vistas.SafetyNumberActivity"
             android:exported="false" />
         <activity
