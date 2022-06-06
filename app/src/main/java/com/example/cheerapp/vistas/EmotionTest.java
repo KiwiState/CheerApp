@@ -38,7 +38,7 @@ public class EmotionTest extends AppCompatActivity implements Emocion.EmocionCal
 
     /* El UsuarioLocal sirve para almacenar un objetio de tipo Usuario y luego acceder a sus atributos para
     poder tener la sesión logeada entre clases y activities */
-    UsuarioLocal usuarioLocal.;
+    UsuarioLocal usuarioLocal;
 
     Button btnTest;
     TextView txtVTest;
@@ -56,6 +56,7 @@ public class EmotionTest extends AppCompatActivity implements Emocion.EmocionCal
 
         btnTest = (Button) (findViewById(R.id.bttnTest));
         txtVTest = (TextView) (findViewById(R.id.txtVTest));
+
 
         //Acción que se ejecuta al apretar el botón de la vista
         btnTest.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +80,7 @@ public class EmotionTest extends AppCompatActivity implements Emocion.EmocionCal
                 try {
                     //Transformación del String que se recibe como respuesta del Web Service a JSONArray.
                     emotion.setArrayEmocion(new JSONArray(response));
-                    //Se le pasa el JSONArray que se acaba de transformar a este método (está mas abajo) para que ejecute alguna acción con éste.
+                    //Se le pasa el JSONArray que se acaba de transformar a este método (está más abajo) para que ejecute alguna acción con éste.
                     displayEmocion(emotion.getArrayEmocion());
 
                 } catch (JSONException e) {
@@ -110,10 +111,10 @@ public class EmotionTest extends AppCompatActivity implements Emocion.EmocionCal
     }
 
     // Método de tipo Callback que recibe el JSONArray desde el Web Service.
-    // En caso de que quieras hacer una función con la JSONArray, hazla acá. Por ejemplo, yo puse que rellenara un TextView con el JSONArray que recibe.
     // Este método se ejecuta al momento que se ejecuta el método de arriba, no se ejecuta por si solo.
     @Override
     public void displayEmocion(JSONArray emocion) {
         txtVTest.setText(emocion.toString());
+
     }
 }
