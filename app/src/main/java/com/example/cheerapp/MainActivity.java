@@ -33,6 +33,12 @@ import java.util.Collections;
 public class MainActivity extends AppCompatActivity {
     private Button btn_emo;
     private Button btn_his;
+
+    private Button btn_safetyn;
+    private Button btn_nayuda;
+    private Button btn_DBI;
+
+
     ArrayList<JsonEmotion> ListaE;
     //btn_historial
     @Override
@@ -42,7 +48,9 @@ public class MainActivity extends AppCompatActivity {
         ListaE = new ArrayList<>();
         btn_emo = findViewById(R.id.btn_emotion);
         btn_his = findViewById(R.id.btn_historial);
-
+        btn_safetyn = findViewById(R.id.btn_SafetyN);
+        btn_nayuda = findViewById(R.id.btn_Nayudas);
+        btn_DBI = findViewById(R.id.btn_DBI_II);
         loadData();
         patronEm();
 
@@ -57,6 +65,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this,MainJournal.class);
+                startActivity(i);
+            }
+        });
+        btn_safetyn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this,SafetyNumber.class);
+                startActivity(i);
+            }
+        });
+        btn_nayuda.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this,HelpNumbers.class);
+                startActivity(i);
+            }
+        });
+        btn_DBI.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this,SafetyNumber.class);
                 startActivity(i);
             }
         });
@@ -95,15 +124,18 @@ public class MainActivity extends AppCompatActivity {
             promE = sumE/counterD;
             if(promE <5){
                 //dar consejos y numeros de ayuda
-                //esta animicamente el mal usuario :c
+                //esta animicamente el mal usuario :
+                btn_nayuda.setVisibility (View.VISIBLE);
                 Toast.makeText(MainActivity.this,"El usuario presenta un nivel animico bajo",Toast.LENGTH_SHORT).show();
             }
             if (promE <= 2.5){
+                btn_DBI.setVisibility (View.VISIBLE);
                 // dar formulario DBI
                 //esta critico el usuario >;c #noBoobis
                 Toast.makeText(MainActivity.this,"El usuario presenta un nivel animico pauperrimo",Toast.LENGTH_LONG).show();
             }
         } else {
+
             Toast.makeText(MainActivity.this,"No hay suficientes datos para hacer un patron",Toast.LENGTH_SHORT).show();
         }
         Collections.reverse(ListaE);                                                                //revierte a estado original el orden del array

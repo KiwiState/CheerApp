@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CheerApp">
         <activity
+            android:name=".DBIForm"
+            android:exported="false" />
+        <activity
+            android:name=".HelpNumbers"
+            android:exported="false" />
+        <activity
+            android:name=".SafetyNumber"
+            android:exported="false" />
+        <activity
             android:name=".MainJournal"
             android:exported="false" />
         <activity
