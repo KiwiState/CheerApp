@@ -47,15 +47,17 @@ public class EmotionTest extends AppCompatActivity implements Emocion.EmocionCal
     //Se guarda en el atributo arrayEmocion.
     Emocion emotion = new Emocion();
 
+    String numeroUser = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emotion_test);
         usuarioLocal = new UsuarioLocal(this);
-
         btnTest = (Button) (findViewById(R.id.bttnTest));
         txtVTest = (TextView) (findViewById(R.id.txtVTest));
+        fetchNumeroUser("http://144.22.35.197/fetchNumero.php");
 
 
         //Acción que se ejecuta al apretar el botón de la vista
@@ -63,7 +65,8 @@ public class EmotionTest extends AppCompatActivity implements Emocion.EmocionCal
             @Override
             public void onClick(View v) {
                 //Llamado al método que consigue la información requerida, recibe como parámetro la URL del Web Service que ejecuta la query en SQL.
-                consultarEstadoEmocional("http://144.22.35.197/consulta.php");
+                //consultarEstadoEmocional("http://144.22.35.197/consulta.php");
+                ingresarEstadoEmocional("http://144.22.35.197/AgregarEmocion.php");
 
             }
         });
@@ -115,6 +118,83 @@ public class EmotionTest extends AppCompatActivity implements Emocion.EmocionCal
     @Override
     public void displayEmocion(JSONArray emocion) {
         txtVTest.setText(emocion.toString());
+
+    }
+
+
+    // Método para ingresar un estado emocional a la base de datos
+    private void ingresarEstadoEmocional(String URL){
+        RequestQueue requestQueue = Volley.newRequestQueue(EmotionTest.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                response=response.trim();
+                if(response.equals("EMOCION INSERTADA")){
+
+                    Toast.makeText(EmotionTest.this, "EMOCION INSERTADA CON ÉXITO", Toast.LENGTH_SHORT).show();
+
+                }else{
+
+                    Toast.makeText(EmotionTest.this, "ERROR EN LA INSERCIÓN", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(EmotionTest.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Usuario usuario = usuarioLocal.getDatosUser();
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("estadoEmocional", "INGRESAR ACÁ EL VALOR DEL ESTADO EMOCIONAL");
+                params.put("dscpEstado", "INGRESAR ACÁ LA DESCRIPCIÓN DEL ESTADO EMOCIONAL");
+                params.put("numeroInsertEmocion", numeroUser);
+                params.put("correoInsertEmocion", usuario.emailUsuario);
+                return params;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+    }
+
+
+    //Método que obtiene el número de celular del usuario logeado.
+    //Se utiliza para hacer el INSERT de la emoción, ya que requiere de ese dato (clave foránea).
+    private void fetchNumeroUser(String URL) {
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(EmotionTest.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                response = response.trim();
+                numeroUser=response;
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(EmotionTest.this, error.toString(), Toast.LENGTH_SHORT).show();
+
+            }
+        }) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Usuario usuario = usuarioLocal.getDatosUser();
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("correoConsulta", usuario.emailUsuario);
+                return params;
+            }
+        };
+
+        requestQueue.add(stringRequest);
 
     }
 }
