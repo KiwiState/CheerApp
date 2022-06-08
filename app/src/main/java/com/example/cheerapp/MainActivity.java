@@ -1,5 +1,6 @@
 package com.example.cheerapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,19 +19,35 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.Duration;
 import java.time.Period;
+
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.cheerapp.clases.Emocion;
+import com.example.cheerapp.clases.Usuario;
+import com.example.cheerapp.clases.UsuarioLocal;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hsalf.smilerating.SmileRating;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Emocion.EmocionCallback{
     private Button btn_emo;
     private Button btn_his;
 
@@ -38,9 +55,23 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_nayuda;
     private Button btn_DBI;
 
+    private TextView testview;
 
+    private int consejo = 0; // si es uno aparecera un popup consejo aleatoreo
+    private int DBI = 0;  // si es positivo se le recomendara al usuario buscar ayuda profesional
+    private String checkdbi;
+
+    /* El UsuarioLocal sirve para almacenar un objetio de tipo Usuario y luego acceder a sus atributos para
+    poder tener la sesión logeada entre clases y activities */
+    UsuarioLocal usuarioLocal;
+
+    //En este objeto se guarda el JSONArray que contiene los datos que me pediste (Nombre, Apellido, Estado, Descripcion_Estado y Fecha).
+    //Se guarda en el atributo arrayEmocion.
+    Emocion emotion = new Emocion();
     ArrayList<JsonEmotion> ListaE;
     //btn_historial
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +82,11 @@ public class MainActivity extends AppCompatActivity {
         btn_safetyn = findViewById(R.id.btn_SafetyN);
         btn_nayuda = findViewById(R.id.btn_Nayudas);
         btn_DBI = findViewById(R.id.btn_DBI_II);
-        loadData();
-        patronEm();
+        usuarioLocal = new UsuarioLocal(this);
+        //loadData();
+        ListaE = new ArrayList<>();
+
+        // patronEm();
 
         btn_emo.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -71,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         btn_safetyn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,SafetyNumber.class);
+                Intent i = new Intent(MainActivity.this,DBIForm.class);
                 startActivity(i);
             }
         });
@@ -156,6 +190,61 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void consultarEstadoEmocional(String URL){
+        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(MainActivity.this,response,Toast.LENGTH_SHORT).show();
+                try {
+                    //Transformación del String que se recibe como respuesta del Web Service a JSONArray.
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("emociones");
+                    for (int i = 0; i <jsonArray.length(); i++){
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        String name = object.getString("NOMBRE");
+                        String lastn = object.getString("APELLIDO");
+                        String state = object.getString("ESTADO");
+                        String desc = object.getString("DESCRIPCION_ESTADO");
+                        String ddate = object.getString("FECHA");
+                        float f = Float.valueOf(state);
+                        ListaE.add(new JsonEmotion(desc, f, ddate));
+                    }
+                    saveData();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Usuario usuario = usuarioLocal.getDatosUser();
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("correoEmocion", usuario.emailUsuario);
+                return params;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+
+    }
+    // Método de tipo Callback que recibe el JSONArray desde el Web Service.
+    // Este método se ejecuta al momento que se ejecuta el método de arriba, no se ejecuta por si solo.
+    @Override
+    public void displayEmocion(JSONArray emocion) {
+
+
+    }
+
     private void showDialog(){
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_main);
@@ -166,4 +255,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void saveData(){
+
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preference",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(ListaE);
+        editor.putString("task list",json);
+        editor.apply();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ListaE.clear();
+        consultarEstadoEmocional("http://144.22.35.197/consulta.php");
+    }
 }
