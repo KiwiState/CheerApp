@@ -86,4 +86,38 @@
         android:background="@drawable/custom_button" />
 
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cartasconsejos"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:alpha="1"
+        app:cardCornerRadius="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/consejo_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adopte buenos hábitos de higiene, mantener una buena higiene personal mejora el estado animico."
+
+                />
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
 </RelativeLayout>

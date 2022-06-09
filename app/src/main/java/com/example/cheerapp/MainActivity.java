@@ -2,18 +2,16 @@ package com.example.cheerapp;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.cardview.widget.CardView;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import java.lang.reflect.Type;
@@ -35,25 +33,24 @@ import com.android.volley.toolbox.Volley;
 import com.example.cheerapp.clases.Emocion;
 import com.example.cheerapp.clases.Usuario;
 import com.example.cheerapp.clases.UsuarioLocal;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.hsalf.smilerating.SmileRating;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements Emocion.EmocionCallback{
 
+    private CardView cardcon;
+
     private Button btn_emo;
     private Button btn_his;
-
+    ArrayList<String> consejitos;
     private Button btn_safetyn;
     private Button btn_nayuda;
     private Button btn_DBI;
@@ -63,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
 
     private String num = "+11122223333";
     private String text;
+
+    private TextView txt_consej;
 
     private String nombre = "Vic";
     private String apellido = "Gan" ;
@@ -79,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
     //Se guarda en el atributo arrayEmocion.
     Emocion emotion = new Emocion();
     ArrayList<JsonEmotion> ListaE;
+
     //btn_historial
 
 
@@ -93,7 +93,10 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
         btn_nayuda = findViewById(R.id.btn_Nayudas);
         btn_DBI = findViewById(R.id.btn_DBI_II);
         btn_out = findViewById(R.id.btn_logout);
+        cardcon = findViewById(R.id.cartasconsejos);
+
         usuarioLocal = new UsuarioLocal(this);
+
         ListaE = new ArrayList<>();
 
         if(!autentificar()){
@@ -272,12 +275,7 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
     }
 
     private void showDialog(){
-        Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_main);
 
-        //dialog.getWindow().setBackgroundDrawableResource(R.drawable.gradient_background);
-
-        dialog.show();
 
     }
 
@@ -348,7 +346,7 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
         consultarEstadoEmocional("http://144.22.35.197/consulta.php");
         cargarconsejo();
         if(consejo > 0) {
-            showDialog();
+
             guardarconsejos();
         }
         cargarDBI();
@@ -359,7 +357,7 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
             sendhelp();
             guardarDBI();
         }
-
+        animationfadein();
 
 
 
@@ -405,7 +403,71 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
         return is_installed;
     }
 
+    private void consejosBD(){
+        consejitos = new ArrayList<>();
+        consejitos.add("Adoptar buenos hábitos de autocuidado y mantener una buena higiene personal mejora el estado animico.");
+        consejitos.add("Una buena alimentacion ayuda a mejorar el estado de animo, procure no saltarse las 3 comidas importantes del día (desayuno, almuerzo, cena)");
+        consejitos.add("Dormir afecta directamente al estado animico , se recomienda dormir las horas recomendadas para que su estado fisico y mental no se vean afectado.");
+        consejitos.add("Recuerde hacer ejercicio regularmente, esto le ayudará a despejar la mente  y mejorará su estado fisico y animico");
+        consejitos.add("Manténgase en comunicación, estar alejado de sus cercanos empeora gradualmente su estado emocional.");
+        consejitos.add("Tome recesos por cada actividad que haga, en estos descansos haga cualquier tipo de actividad que le paresca placentera.");
+        consejitos.add("Intente organizar todas sus actividades por día, mantener un orden en este campo ayudará a no verse influenciado por el estres.");
+        consejitos.add("Establesca limites en las actividades que a ud le provoquen diferentes tipos de tension. (trabajo, escuela, universidad)");
+        consejitos.add("Si ud lo siente necesario, practique actividades de respiración. Estas funcionan para reducir cualquier tipo de tension y aliviar el estres presente.");
+        consejitos.add("No dude en pedir ayuda y en recibir ayuda. Por muy dificil que esto parezca en realidad es la forma más rapida de hallar el problema y resolverlo.");
+    }
+
+    private void animationfadein(){
+        Animation anim = AnimationUtils.loadAnimation(this,R.anim.fadein);
 
 
+        cardcon = findViewById(R.id.cartasconsejos);
+        anim.reset();
+        cardcon.clearAnimation();
+        cardcon.startAnimation(anim);
+
+        anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                animationfadeout();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+    }
+
+    private void animationfadeout(){
+        Animation anim = AnimationUtils.loadAnimation(this,R.anim.fadeout);
+        anim.reset();
+        cardcon.clearAnimation();
+        cardcon.startAnimation(anim);
+
+        anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                cardcon.setAlpha(0);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+    }
 
 }
