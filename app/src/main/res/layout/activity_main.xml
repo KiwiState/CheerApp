@@ -48,6 +48,7 @@
         android:layout_marginEnd="16dp"
         android:layout_weight="1"
         android:alpha="65"
+        android:visibility="gone"
         android:background="@drawable/custom_button" />
 
     <Button
@@ -55,10 +56,10 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="85dp"
         android:layout_marginEnd="16dp"
         android:layout_weight="1"
-        android:visibility="gone"
+
         android:alpha="65"
         android:background="@drawable/custom_button" />
     <Button
@@ -66,9 +67,20 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="160dp"
+
         android:layout_marginEnd="16dp"
-        android:visibility="gone"
+
+        android:layout_weight="1"
+        android:alpha="65"
+        android:background="@drawable/custom_button" />
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
         android:layout_weight="1"
         android:alpha="65"
         android:background="@drawable/custom_button" />

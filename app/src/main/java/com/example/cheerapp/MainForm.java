@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class MainForm extends AppCompatActivity {
     ArrayList<JsonEmotion> ListaE;
@@ -63,7 +64,6 @@ public class MainForm extends AppCompatActivity {
         mEditText =  findViewById(R.id.edittext_desc);//ID del texto de como te siente
         ratingBar = findViewById(R.id.rating);
         btn_enviar = findViewById(R.id.btns_save);
-        btn_dbug = findViewById(R.id.btns_load);
         usuarioLocal = new UsuarioLocal(this);
         fetchNumeroUser("http://144.22.35.197/fetchNumero.php");
 
@@ -83,18 +83,8 @@ public class MainForm extends AppCompatActivity {
         btn_enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //saveData();
-                Toast.makeText(MainForm.this,"funko pop ",Toast.LENGTH_SHORT).show();
                 ingresarEstadoEmocional("http://144.22.35.197/AgregarEmocion.php");
-            }
-        });
 
-        btn_dbug.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //saveData();
-                //deleted_and_save();
-                //Toast.makeText(MainForm.this,"deleted",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -162,6 +152,7 @@ public class MainForm extends AppCompatActivity {
                 if(response.equals("EMOCION INSERTADA")){
 
                     Toast.makeText(MainForm.this, "EMOCION INSERTADA CON ÉXITO", Toast.LENGTH_SHORT).show();
+                    passactivity();
 
                 }else{
 
@@ -228,6 +219,15 @@ public class MainForm extends AppCompatActivity {
 
     }
 
+    private void passactivity(){
+
+         Intent intent = new Intent(this,MainActivity.class);
+         startActivity(intent);
+         SharedPreferences pf =getSharedPreferences("nconsejo",MODE_PRIVATE);
+         SharedPreferences.Editor editor = pf.edit();
+         editor = editor.putInt("consejo",1);
+         editor.commit();
+    }
 
 
 }

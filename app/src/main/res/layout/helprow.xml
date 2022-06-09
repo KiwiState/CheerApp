@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="6dip" >
+
+    <TextView
+        android:id="@+id/Tituloh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Titulo" />
+
+    <TextView
+        android:id="@+id/contactoh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Tituloh"
+        android:text="Contacto" />
+
+    <TextView
+        android:id="@+id/desch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contactoh"
+        android:text="Desc" />
+
+
+</RelativeLayout>

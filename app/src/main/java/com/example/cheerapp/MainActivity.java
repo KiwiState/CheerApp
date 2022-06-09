@@ -9,6 +9,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -48,17 +50,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements Emocion.EmocionCallback{
+
     private Button btn_emo;
     private Button btn_his;
 
     private Button btn_safetyn;
     private Button btn_nayuda;
     private Button btn_DBI;
+    private Button btn_out;
 
     private TextView testview;
 
+    private String num = "+11122223333";
+    private String text;
+
+    private String nombre = "Vic";
+    private String apellido = "Gan" ;
+
     private int consejo = 0; // si es uno aparecera un popup consejo aleatoreo
-    private int DBI = 0;  // si es positivo se le recomendara al usuario buscar ayuda profesional
+    private int DBI = 0;     // si es positivo se le recomendara al usuario buscar ayuda profesional
     private String checkdbi;
 
     /* El UsuarioLocal sirve para almacenar un objetio de tipo Usuario y luego acceder a sus atributos para
@@ -82,11 +92,17 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
         btn_safetyn = findViewById(R.id.btn_SafetyN);
         btn_nayuda = findViewById(R.id.btn_Nayudas);
         btn_DBI = findViewById(R.id.btn_DBI_II);
+        btn_out = findViewById(R.id.btn_logout);
         usuarioLocal = new UsuarioLocal(this);
-        //loadData();
         ListaE = new ArrayList<>();
 
-        // patronEm();
+        if(!autentificar()){
+
+            Intent intent = new Intent(MainActivity.this, login.class);
+            startActivity(intent);
+            finish();
+
+        }
 
         btn_emo.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -119,13 +135,21 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
         btn_DBI.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,SafetyNumber.class);
+                Intent i = new Intent(MainActivity.this,DBIForm.class);
                 startActivity(i);
+            }
+        });
+        btn_out.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                deslogear();
             }
         });
 
 
     }
+
+
     private void patronEm(){
         int counterD = 0;                                                                            //Contadores de Dia
         int sumE = 0;                                                                                //Suma de todos los valore de la emociones
@@ -134,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
                                                                                                      //Toast.makeText(MainActivity.this,"Diffrence between dates is : "+diffDays + "days",Toast.LENGTH_SHORT).show();// se crea el array **solo testeo**
         LocalDate fecha = LocalDate.now();                                                           // se guarda la fecha de hoy
 
-        Collections.reverse(ListaE);                                                                 //dara vuelta el array List para leer de el ultimo a el primero
+                                                                                                     //dara vuelta el array List para leer de el ultimo a el primero
 
         for(int i = 0; i < ListaE.size(); i++){                                                      //se hace un for para pasar por todos los valores de el array
 
@@ -172,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
 
             Toast.makeText(MainActivity.this,"No hay suficientes datos para hacer un patron",Toast.LENGTH_SHORT).show();
         }
-        Collections.reverse(ListaE);                                                                //revierte a estado original el orden del array
+                                                                                                    //revierte a estado original el orden del array
     }
 
     private void loadData(){ // esto es con shared preference
@@ -211,6 +235,8 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
                         ListaE.add(new JsonEmotion(desc, f, ddate));
                     }
                     saveData();
+                    patronEm();
+                    borrarbtnemocion();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -266,10 +292,120 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
 
     }
 
+    private void guardarconsejos(){
+        SharedPreferences pf =getSharedPreferences("nconsejo",MODE_PRIVATE);
+        SharedPreferences.Editor editor = pf.edit();
+        editor = editor.putInt("consejo",0);
+        editor.commit();
+    }
+
+    private void cargarconsejo(){
+        SharedPreferences pf =getSharedPreferences("nconsejo",MODE_PRIVATE);
+        consejo = pf.getInt("consejo",0);
+    }
+
+    private void guardarDBI(){
+        SharedPreferences pf =getSharedPreferences("nDBI",MODE_PRIVATE);
+        SharedPreferences.Editor editor = pf.edit();
+        editor = editor.putInt("DBI",0);
+        editor.commit();
+    }
+
+    private void cargarDBI(){
+        SharedPreferences pf =getSharedPreferences("nDBI",MODE_PRIVATE);
+        DBI = pf.getInt("DBI",0);
+    }
+
+    public void cargarNAN(){
+        SharedPreferences pf =getSharedPreferences("NAN",MODE_PRIVATE);
+        nombre = pf.getString("Nombre","Vicente");
+        apellido = pf.getString("Apellido","Gandolfo");
+        num = pf.getString("Numero","+00011112222");
+    }
+
+    private void borrarbtnemocion(){
+
+            LocalDate today = LocalDate.now();
+            LocalDate d1 = LocalDate.parse(ListaE.get(0).getFecha(), DateTimeFormatter.ISO_LOCAL_DATE);
+            Period period = Period.between(d1, today);
+            int days = Math.abs(period.getDays());
+            if(days >= 1) {
+                //dia es mayor a uno
+            } else {
+                btn_emo.setVisibility(View.GONE);
+            }
+
+
+
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
         ListaE.clear();
+        cargarNAN();
+        //Toast.makeText(this, nombre +  apellido + num, Toast.LENGTH_SHORT).show();
         consultarEstadoEmocional("http://144.22.35.197/consulta.php");
+        cargarconsejo();
+        if(consejo > 0) {
+            showDialog();
+            guardarconsejos();
+        }
+        cargarDBI();
+        if(DBI > 0){
+            text = "Somos Cheer-App, le comentamos que su amigo "+ nombre+ " " + apellido +" lo ha registrado como su número de confianza.\n" +
+                    "En estos momentos "+ nombre+ " " + apellido +" no se encuentra emocionalmente bien, le sugerimos que hable con él.";
+            //showDialog();
+            sendhelp();
+            guardarDBI();
+        }
+
+
+
+
+
+
     }
+
+    private boolean autentificar(){
+        return usuarioLocal.getLoggedUser();
+    }
+
+    public void deslogear(){
+
+        usuarioLocal.limpiarDatosUser();
+        usuarioLocal.logear(false);
+
+        Intent intent = new Intent(this, login.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void sendhelp(){
+        boolean installed = isAppInstalled("com.whatsapp");
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("http://api.whatsapp.com/send?phone="+num+"&text="+ text));
+            startActivity(intent);
+
+
+    }
+
+    private boolean isAppInstalled(String s) {
+        PackageManager packageManager = getPackageManager();
+        boolean is_installed;
+
+        try {
+            packageManager.getPackageInfo(s, PackageManager.GET_ACTIVITIES);
+            is_installed = true;
+        } catch (PackageManager.NameNotFoundException e) {
+            is_installed = false;
+            e.printStackTrace();
+        }
+        return is_installed;
+    }
+
+
+
+
 }

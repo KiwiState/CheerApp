@@ -51,7 +51,7 @@ public class login extends AppCompatActivity {
         txtVToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(login.this, registro.class));
+                startActivity(new Intent(login.this, RegisterActivity.class));
                 finish();
             }
         });

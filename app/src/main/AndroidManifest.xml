@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cheerapp">
+    package="com.example.cheerapp" >
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -10,22 +11,25 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.CheerApp">
+        android:theme="@style/Theme.CheerApp"
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".SafetyNumberActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
         <activity
             android:name=".registro"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".login"
             android:exported="false" />
         <activity
             android:name=".DBIForm"
             android:exported="false" />
         <activity
             android:name=".HelpNumbers"
-            android:exported="false" />
-        <activity
-            android:name=".SafetyNumber"
             android:exported="false" />
         <activity
             android:name=".MainJournal"
@@ -37,8 +41,8 @@
             android:name=".MainForm"
             android:exported="false" />
         <activity
-            android:name=".login"
-            android:exported="true">
+            android:name=".MainActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

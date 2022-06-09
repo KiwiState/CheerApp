@@ -56,16 +56,6 @@
             android:background="@drawable/custom_button"
             android:text="Guardar" />
 
-        <Button
-            android:id="@+id/btns_load"
-            android:layout_width="130dp"
-            android:layout_height="49dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="25dp"
-            android:background="@drawable/custom_button"
-            android:text="load" />
-
 
         <EditText
             android:id="@+id/edittext_desc"

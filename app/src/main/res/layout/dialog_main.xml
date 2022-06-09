@@ -3,14 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@android:color/transparent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.cardview.widget.CardView
         android:layout_width="350dp"
         android:layout_height="200dp"
         android:layout_centerInParent="true"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="16dp">
+        android:layout_marginTop="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,11 +19,12 @@
             android:padding="20dp">
 
             <TextView
+                android:id="@+id/consejo_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Estas seguro de no detallar tu dia?"
-                android:textSize="19sp"
-                android:textStyle="bold"/>
+                android:text="Adopte buenos hábitos de higiene, mantener una buena higiene personal mejora el estado animico."
+
+                />
 
         </LinearLayout>
 
