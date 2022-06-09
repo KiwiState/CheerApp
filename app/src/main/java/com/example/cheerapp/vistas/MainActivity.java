@@ -116,7 +116,14 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 response=response.trim();
 
-                // El "response" devuelve el safety number.
+                if(!response.equals("")){
+
+                    //El response es el safety number
+
+                }else{
+
+                    Toast.makeText(MainActivity.this, "No SN registered", Toast.LENGTH_SHORT).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -147,7 +154,14 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 response=response.trim();
 
-                //El "response" es el apellido
+                if(!response.equals("")){
+
+                    //El response es el apellido
+
+                }else{
+
+                    Toast.makeText(MainActivity.this, "Error al consultar apellido", Toast.LENGTH_SHORT).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
