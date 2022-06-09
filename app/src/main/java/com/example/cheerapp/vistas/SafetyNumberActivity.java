@@ -79,9 +79,10 @@ public class SafetyNumberActivity extends AppCompatActivity {
                 response = response.trim();
 
                 if (response.equals("SN INSERTADO")) {
-
-                    startActivity(new Intent(SafetyNumberActivity.this, MainActivity.class));
+                    Intent intent = new Intent(SafetyNumberActivity.this, MainActivity.class);
+                    startActivity(intent);
                     finish();
+
 
                 } else {
 

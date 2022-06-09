@@ -71,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
         fetchNombre("http://144.22.35.197/fetchNombre.php");
 
     }
-
+    //Método para consultar el nombre según el correo del usuario logeado.
+    //Invocación con URL >> fetchNombre("http://144.22.35.197/fetchNombre.php");
     private void fetchNombre(String URL){
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
@@ -106,6 +107,69 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    //Método para consultar el safety number según el correo del usuario logeado.
+    //Invocación con URL >> consultarSN("http://144.22.35.197/ConsultarSN.php");
+    private void consultarSN(String URL){
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                response=response.trim();
+
+                // El "response" devuelve el safety number.
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Usuario usuario = usuarioLocal.getDatosUser();
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("correoSN", usuario.emailUsuario);
+                return params;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+
+    }
+    //Método para consultar apellido según el correo del usuario logeado.
+    //Invocación con URL >> consultarApellido("http://144.22.35.197/fetchApellido.php");
+    private void consultarApellido(String URL){
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                response=response.trim();
+
+                //El "response" es el apellido
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Usuario usuario = usuarioLocal.getDatosUser();
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("correoApellido", usuario.emailUsuario);
+                return params;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+    }
+
+
+    //Métodos para mantener la sesión logeada y deslogearse.
     private boolean autentificar(){
         return usuarioLocal.getLoggedUser();
     }
