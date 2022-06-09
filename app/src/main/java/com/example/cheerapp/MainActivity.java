@@ -1,6 +1,7 @@
 package com.example.cheerapp;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -43,9 +44,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements Emocion.EmocionCallback{
-
+    private TextView  txtconsejo;
     private CardView cardcon;
 
     private Button btn_emo;
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
     private String num = "+11122223333";
     private String text;
 
-    private TextView txt_consej;
+
 
     private String nombre = "Vic";
     private String apellido = "Gan" ;
@@ -94,10 +96,15 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
         btn_DBI = findViewById(R.id.btn_DBI_II);
         btn_out = findViewById(R.id.btn_logout);
         cardcon = findViewById(R.id.cartasconsejos);
+        txtconsejo = findViewById(R.id.consejo_id);
+
+
 
         usuarioLocal = new UsuarioLocal(this);
 
         ListaE = new ArrayList<>();
+
+        consejosBD();
 
         if(!autentificar()){
 
@@ -149,6 +156,15 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
             }
         });
 
+        cardcon.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if(cardcon.getAlpha() == 1){
+                    animationfadeout();
+                }
+            }
+        });
+
 
     }
 
@@ -183,21 +199,21 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
 
         if(counterD >= 10){
             promE = sumE/counterD;
-            if(promE <5){
+            if(promE <2.5){
                 //dar consejos y numeros de ayuda
                 //esta animicamente el mal usuario :
                 btn_nayuda.setVisibility (View.VISIBLE);
-                Toast.makeText(MainActivity.this,"El usuario presenta un nivel animico bajo",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this,"El usuario presenta un nivel animico bajo",Toast.LENGTH_SHORT).show();
             }
-            if (promE <= 2.5){
+            if (promE <= 1.25){
                 btn_DBI.setVisibility (View.VISIBLE);
                 // dar formulario DBI
                 //esta critico el usuario >;c #noBoobis
-                Toast.makeText(MainActivity.this,"El usuario presenta un nivel animico pauperrimo",Toast.LENGTH_LONG).show();
+                //Toast.makeText(MainActivity.this,"El usuario presenta un nivel animico pauperrimo",Toast.LENGTH_LONG).show();
             }
         } else {
 
-            Toast.makeText(MainActivity.this,"No hay suficientes datos para hacer un patron",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this,"No hay suficientes datos para hacer un patron",Toast.LENGTH_SHORT).show();
         }
                                                                                                     //revierte a estado original el orden del array
     }
@@ -344,20 +360,25 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
         cargarNAN();
         //Toast.makeText(this, nombre +  apellido + num, Toast.LENGTH_SHORT).show();
         consultarEstadoEmocional("http://144.22.35.197/consulta.php");
+
         cargarconsejo();
         if(consejo > 0) {
-
+            animationfadein();
             guardarconsejos();
         }
+
         cargarDBI();
         if(DBI > 0){
             text = "Somos Cheer-App, le comentamos que su amigo "+ nombre+ " " + apellido +" lo ha registrado como su número de confianza.\n" +
                     "En estos momentos "+ nombre+ " " + apellido +" no se encuentra emocionalmente bien, le sugerimos que hable con él.";
             //showDialog();
-            sendhelp();
+            animationfadeinDBI(DBI);
+            if(DBI == 2){
+                sendhelp();
+            }
             guardarDBI();
         }
-        animationfadein();
+
 
 
 
@@ -418,9 +439,12 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
     }
 
     private void animationfadein(){
+        cardcon.setVisibility (View.VISIBLE);
+        cardcon.setAlpha(1);
+        Random random = new Random();
+        int val = random.nextInt(9);
+        txtconsejo.setText(consejitos.get(val));
         Animation anim = AnimationUtils.loadAnimation(this,R.anim.fadein);
-
-
         cardcon = findViewById(R.id.cartasconsejos);
         anim.reset();
         cardcon.clearAnimation();
@@ -434,7 +458,7 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                animationfadeout();
+
             }
 
             @Override
@@ -460,6 +484,41 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
             @Override
             public void onAnimationEnd(Animation animation) {
                 cardcon.setAlpha(0);
+                cardcon.setVisibility (View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+    }
+
+    private void animationfadeinDBI(int s){
+        cardcon.setVisibility (View.VISIBLE);
+        cardcon.setAlpha(1);
+        if(s == 2){
+            txtconsejo.setText("¡Hola! Hemos detectado que tienes un nivel de depresión alto, te recomendamos  buscar ayuda profesional para evitar que tu estado actual empeore.");
+        } else {
+            txtconsejo.setText("¡Hola! No hemos detectado un nivel grave de depresión aun si necesitas apoyo consulta nuestros números de apoyo.");
+        }
+
+        Animation anim = AnimationUtils.loadAnimation(this,R.anim.fadein);
+        cardcon = findViewById(R.id.cartasconsejos);
+        anim.reset();
+        cardcon.clearAnimation();
+        cardcon.startAnimation(anim);
+
+        anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
             }
 
             @Override
