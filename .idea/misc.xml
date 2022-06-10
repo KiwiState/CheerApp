@@ -7,28 +7,21 @@
         <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/drawable/custom_button.xml" value="0.3671875" />
         <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/drawable/gradien_background.xml" value="0.22135416666666666" />
         <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/drawable/gradient_background.xml" value="0.3671875" />
-        <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/drawable/gradient_background_2.xml" value="0.164" />
         <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3828125" />
-        <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/drawable/rectangle.xml" value="0.231" />
-        <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/layout/activity_dbiform.xml" value="0.33" />
-        <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/layout/activity_descripcion.xml" value="0.36666666666666664" />
-        <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/layout/activity_help_numbers.xml" value="0.25" />
-        <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/layout/activity_login.xml" value="0.5" />
         <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/layout/activity_main_form.xml" value="0.28751974723538704" />
-        <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/layout/activity_main_history.xml" value="0.22" />
-        <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/layout/activity_main_journal.xml" value="0.33" />
-        <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/layout/activity_register.xml" value="0.33" />
-        <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/layout/activity_registro.xml" value="0.266304347826087" />
-        <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/layout/activity_safety_number.xml" value="0.25" />
-        <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/layout/activity_safety_number2.xml" value="0.33697916666666666" />
-        <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/layout/activity_safety_number_test.xml" value="0.36666666666666664" />
-        <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/layout/dialog_main.xml" value="0.1" />
-        <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/layout/helprow.xml" value="0.30254777070063693" />
-        <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/layout/item_main.xml" value="0.25" />
-        <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/layout/item_row.xml" value="0.33" />
         <entry key="..\:/AndroidStudioProjects/Projecto_CheerApp/app/src/main/res/layout/sadas.xml" value="0.1707193515704154" />
-        <entry key="..\:/Users/Trollvin/Documents/GitHub/CheerApp/app/src/main/res/layout/activity_main.xml" value="0.16140350877192983" />
+        <entry key="..\:/Users/Nico/Documents/GitHub/CheerApp/app/src/main/res/drawable/custom_button.xml" value="0.496" />
+        <entry key="..\:/Users/Nico/Documents/GitHub/CheerApp/app/src/main/res/drawable/gradient_background.xml" value="0.496" />
+        <entry key="..\:/Users/Nico/Documents/GitHub/CheerApp/app/src/main/res/drawable/rectangle.xml" value="0.5065" />
+        <entry key="..\:/Users/Nico/Documents/GitHub/CheerApp/app/src/main/res/layout/activity_emotion_test.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Nico/Documents/GitHub/CheerApp/app/src/main/res/layout/activity_login.xml" value="0.67" />
+        <entry key="..\:/Users/Nico/Documents/GitHub/CheerApp/app/src/main/res/layout/activity_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Nico/Documents/GitHub/CheerApp/app/src/main/res/layout/activity_main_form.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Nico/Documents/GitHub/CheerApp/app/src/main/res/layout/activity_prueba_consulta.xml" value="0.31354166666666666" />
+        <entry key="..\:/Users/Nico/Documents/GitHub/CheerApp/app/src/main/res/layout/activity_register.xml" value="0.5" />
+        <entry key="..\:/Users/Nico/Documents/GitHub/CheerApp/app/src/main/res/layout/activity_safety_number.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Nico/Documents/GitHub/CheerApp/app/src/main/res/layout/prueba_database.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Trollvin/Documents/GitHub/CheerApp/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>
