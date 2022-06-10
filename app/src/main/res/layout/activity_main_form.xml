@@ -38,7 +38,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/custom_button"
+            android:background="@drawable/rectangle"
             android:ems="10"
             android:fontFamily="serif"
             android:hint="Describe tu dia"
@@ -64,13 +64,14 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="53dp"
             android:layout_marginEnd="46dp"
+            android:background="@drawable/rectangle"
             app:cardCornerRadius="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.605"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.323">
+            app:layout_constraintVertical_bias="0.337">
 
 
             <RatingBar
@@ -106,22 +107,6 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="serif"
-            android:text="Cuentanos tu estado emocional"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.516"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.117" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
