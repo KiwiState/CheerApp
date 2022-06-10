@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
-    android:padding="6dip"
+    android:padding="10dip"
     android:background="@drawable/rectangle">
 
     <TextView
@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Titulo"
+        android:justificationMode="inter_word"
         />
 
     <TextView
@@ -17,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/Tituloh"
+        android:justificationMode="inter_word"
         android:text="Contacto" />
 
     <TextView
@@ -24,6 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/contactoh"
+        android:justificationMode="inter_word"
         android:text="Desc" />
 
 

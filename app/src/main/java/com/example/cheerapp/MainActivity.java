@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
     private String num = "+11122223333";
     private String text;
 
+    private TextView txtcont;
+    private TextView txttestdbi;
 
 
     private String nombre = "Vic";
@@ -98,6 +100,11 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
         btn_out = findViewById(R.id.btn_logout);
         cardcon = findViewById(R.id.cartasconsejos);
         txtconsejo = findViewById(R.id.consejo_id);
+
+        txtcont = findViewById(R.id.contactotextm);
+        txttestdbi = findViewById(R.id.txttestdbi);
+
+        Toast.makeText(MainActivity.this,"Bienvenido!",Toast.LENGTH_SHORT).show();
 
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -204,10 +211,13 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
                 //dar consejos y numeros de ayuda
                 //esta animicamente el mal usuario :
                 btn_nayuda.setVisibility (View.VISIBLE);
+                txtcont.setVisibility (View.VISIBLE);
+
                 //Toast.makeText(MainActivity.this,"El usuario presenta un nivel animico bajo",Toast.LENGTH_SHORT).show();
             }
             if (promE <= 2){
                 btn_DBI.setVisibility (View.VISIBLE);
+                txttestdbi.setVisibility (View.VISIBLE);
                 // dar formulario DBI
                 //esta critico el usuario >;c #noBoobis
                 //Toast.makeText(MainActivity.this,"El usuario presenta un nivel animico pauperrimo",Toast.LENGTH_LONG).show();
@@ -256,7 +266,7 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
                     }
                     saveData();
                     patronEm();
-                    //borrarbtnemocion();
+                    borrarbtnemocion();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
