@@ -3,9 +3,11 @@ package com.example.cheerapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -27,6 +29,10 @@ public class MainJournal extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        TextView textEmo = (TextView) findViewById(R.id.textEmo);
+        textEmo.setPaintFlags(textEmo.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_journal);
         //LvDatos = findViewById(R.id.lvDatos);

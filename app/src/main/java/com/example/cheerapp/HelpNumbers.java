@@ -2,8 +2,10 @@ package com.example.cheerapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,10 @@ public class HelpNumbers extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        TextView textAyu = (TextView) findViewById(R.id.textAyu);
+        textAyu.setPaintFlags(textAyu.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_numbers);
         HelpBD();

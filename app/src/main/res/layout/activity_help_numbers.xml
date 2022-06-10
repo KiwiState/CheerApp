@@ -11,7 +11,7 @@
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textAyu"
         android:layout_width="393dp"
         android:layout_height="45dp"
         android:layout_alignParentEnd="true"
