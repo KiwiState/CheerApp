@@ -6,67 +6,103 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainForm"
-    android:background="@drawable/gradient_background_2">
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="350dp"
-        android:layout_height="200dp"
-        android:layout_centerInParent="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="20dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Como te sientes?"
-                android:textSize="24sp"
-                android:textStyle="bold"/>
-
-            <RatingBar
-                android:id="@+id/rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-
-
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
+    android:background="@color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <Button
             android:id="@+id/btns_save"
             android:layout_width="130dp"
             android:layout_height="49dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="100dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="138dp"
+            android:layout_marginEnd="142dp"
+            android:layout_marginBottom="66dp"
             android:background="@drawable/custom_button"
+            android:backgroundTint="#EAECEE"
             android:text="Guardar" />
-
 
         <EditText
             android:id="@+id/edittext_desc"
             android:layout_width="350dp"
             android:layout_height="100dp"
-            android:layout_centerInParent="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="216dp"
+            android:layout_marginEnd="23dp"
             android:background="@drawable/custom_button"
             android:ems="10"
-            android:hint="describe tu dia"
+            android:fontFamily="serif"
+            android:hint="Describe tu dia"
             android:inputType="textMultiLine"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:cardCornerRadius="20dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="350dp"
+            android:layout_height="200dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="53dp"
+            android:layout_marginTop="363dp"
+            android:layout_marginEnd="46dp"
+            android:layout_marginBottom="208dp"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="serif"
+                android:text="¿Cómo te sientes?"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.505"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.22"
+                tools:layout_conversion_absoluteHeight="33dp"
+                tools:layout_conversion_absoluteWidth="217dp" />
+
+            <RatingBar
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.844"
+                tools:layout_conversion_absoluteHeight="57dp"
+                tools:layout_conversion_absoluteWidth="240dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
 
     </RelativeLayout>
 

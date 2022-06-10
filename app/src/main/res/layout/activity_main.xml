@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/gradient_background"
+    android:background="@color/white"
     >
 
 
@@ -23,12 +23,14 @@
         android:layout_weight="1"
         android:alpha="65"
         android:background="@drawable/custom_button"
+        android:backgroundTint="#EAECEE"
         android:fontFamily="@font/fredo"
         android:text="Emocion"
         android:textColor="#000000"
         app:backgroundTint="@null" />
 
     <Button
+        android:backgroundTint="#ABEBC6"
         android:id="@+id/btn_historial"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -59,9 +61,10 @@
         android:layout_marginTop="85dp"
         android:layout_marginEnd="16dp"
         android:layout_weight="1"
-
+        android:backgroundTint="#C39BD3"
         android:alpha="65"
         android:background="@drawable/custom_button" />
+
     <Button
         android:id="@+id/btn_DBI_II"
         android:layout_width="50dp"
@@ -73,9 +76,11 @@
 
         android:layout_weight="1"
         android:alpha="65"
-        android:background="@drawable/custom_button" />
+        android:background="@drawable/custom_button"
+        android:backgroundTint="#F7DC6F"/>
 
     <Button
+        android:backgroundTint="#E74C3C"
         android:id="@+id/btn_logout"
         android:layout_width="50dp"
         android:layout_height="50dp"

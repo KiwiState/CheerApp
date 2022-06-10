@@ -5,10 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="@color/white"
     tools:context=".MainHistory">
 
     <ListView
+        android:layout_marginTop = "20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
