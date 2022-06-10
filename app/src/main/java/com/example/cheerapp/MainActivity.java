@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
         txtcont = findViewById(R.id.contactotextm);
         txttestdbi = findViewById(R.id.txttestdbi);
 
+
         Toast.makeText(MainActivity.this,"Bienvenido!",Toast.LENGTH_SHORT).show();
 
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -111,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
         usuarioLocal = new UsuarioLocal(this);
 
         ListaE = new ArrayList<>();
+
 
         consejosBD();
 
@@ -405,7 +407,8 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
 
         usuarioLocal.limpiarDatosUser();
         usuarioLocal.logear(false);
-
+        ListaE.clear();
+        saveData();
         Intent intent = new Intent(this, login.class);
         startActivity(intent);
         finish();

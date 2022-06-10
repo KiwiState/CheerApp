@@ -24,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cheerapp.R;
 import com.example.cheerapp.clases.UsuarioLocal;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -187,6 +188,8 @@ public class login extends AppCompatActivity {
         return validador;
 
     }
+
+
 
     private void clearUserTextWarning(){
         tViewUser.setVisibility(View.INVISIBLE);
