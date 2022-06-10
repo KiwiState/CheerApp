@@ -2,8 +2,11 @@ package com.example.cheerapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.pm.ActivityInfo;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,9 @@ public class HelpNumbers extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_numbers);
+        TextView textAyu = (TextView) findViewById(R.id.textAyu);
+        textAyu.setPaintFlags(textAyu.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         HelpBD();
         //Nuevo codigo
         mListView = findViewById(R.id.HNBS);

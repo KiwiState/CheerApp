@@ -6,6 +6,7 @@ import java.time.Period;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.renderscript.ScriptGroup;
 import android.text.TextUtils;
@@ -13,7 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RatingBar;
+
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -27,6 +28,7 @@ import com.example.cheerapp.clases.Usuario;
 import com.example.cheerapp.clases.UsuarioLocal;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.hsalf.smileyrating.SmileyRating;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -51,19 +53,33 @@ public class MainForm extends AppCompatActivity {
     private Button btn_enviar;
     private Button btn_dbug;
     private EditText mEditText;
-    private RatingBar ratingBar;
+
     private String numeroUser;
     UsuarioLocal usuarioLocal;
+    private SmileyRating smileyRating;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_form);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         btn_enviar = findViewById(R.id.btns_save);
         mEditText =  findViewById(R.id.edittext_desc);//ID del texto de como te siente
-        ratingBar = findViewById(R.id.rating);
+
         btn_enviar = findViewById(R.id.btns_save);
+
+        smileyRating = findViewById(R.id.smile_rating);
+
+        smileyRating.setRating(1);
+        smileyRating.setTitle(SmileyRating.Type.TERRIBLE,"Terrible");
+        smileyRating.setTitle(SmileyRating.Type.BAD,"Mal");
+        smileyRating.setTitle(SmileyRating.Type.OKAY,"Okay");
+        smileyRating.setTitle(SmileyRating.Type.GOOD,"Bien");
+        smileyRating.setTitle(SmileyRating.Type.GREAT,"Genial");
+
+
+
         usuarioLocal = new UsuarioLocal(this);
         fetchNumeroUser("http://144.22.35.197/fetchNumero.php");
 
@@ -72,13 +88,7 @@ public class MainForm extends AppCompatActivity {
         //  Log.d(TAG, "onCreate: desc: " + ListaE.get(i).getDesc()+" nivel de emocion: "+ListaE.get(i).getnEmotion() + " Fecha :" +ListaE.get(i).getFecha());
         }
 
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                //Testeo
-                //Toast.makeText(MainForm.this,"rating : "+rating,Toast.LENGTH_SHORT).show();
-            }
-        });
+
 
         btn_enviar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,8 +103,8 @@ public class MainForm extends AppCompatActivity {
     private void saveData(){
 
         mEditText =  findViewById(R.id.edittext_desc);
-        ratingBar = findViewById(R.id.rating);
-        insertItem(mEditText.getText().toString(),ratingBar.getRating());
+
+       // insertItem(mEditText.getText().toString(),ratingBar.getRating());
         SharedPreferences sharedPreferences = getSharedPreferences("shared preference",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
@@ -171,8 +181,9 @@ public class MainForm extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Usuario usuario = usuarioLocal.getDatosUser();
                 Map<String, String> params = new HashMap<String, String>();
-                float f = ratingBar.getRating();
-                params.put("estadoEmocional",Float.toString(f));
+               // float f = ratingBar.getRating();
+                SmileyRating.Type smiley = smileyRating.getSelectedSmiley();
+                params.put("estadoEmocional",Integer.toString(smiley.getRating()));
                 params.put("dscpEstado", mEditText.getText().toString());
                 params.put("numeroInsertEmocion", numeroUser);
                 params.put("correoInsertEmocion", usuario.emailUsuario);

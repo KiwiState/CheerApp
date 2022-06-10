@@ -3,9 +3,12 @@ package com.example.cheerapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -29,11 +32,13 @@ public class MainJournal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_journal);
+        TextView textEmo = (TextView) findViewById(R.id.textEmo);
+        textEmo.setPaintFlags(textEmo.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         //LvDatos = findViewById(R.id.lvDatos);
         loadData();
         //ArrayAdapter<JsonEmotion> adaptador = new ArrayAdapter<JsonEmotion>(MainJournal.this, android.R.layout.simple_list_item_1,ListaE);
         //LvDatos.setAdapter(adaptador);
-
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //Nuevo codigo
         mListView = findViewById(R.id.LV);

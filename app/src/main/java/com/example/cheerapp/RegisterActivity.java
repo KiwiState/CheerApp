@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -39,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         edTxtNombre = (EditText) (findViewById(R.id.edTxtNombreRegistro));
         edTxtApellido = (EditText) (findViewById(R.id.edTxtApellidoRegistro));
         edTxtNumero = (EditText)  (findViewById(R.id.edTxtNumeroRegistro));

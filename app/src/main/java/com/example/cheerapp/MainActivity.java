@@ -7,6 +7,7 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
         cardcon = findViewById(R.id.cartasconsejos);
         txtconsejo = findViewById(R.id.consejo_id);
 
-
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         usuarioLocal = new UsuarioLocal(this);
 
@@ -199,13 +200,13 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
 
         if(counterD >= 10){
             promE = sumE/counterD;
-            if(promE <2.5){
+            if(promE < 3){
                 //dar consejos y numeros de ayuda
                 //esta animicamente el mal usuario :
                 btn_nayuda.setVisibility (View.VISIBLE);
                 //Toast.makeText(MainActivity.this,"El usuario presenta un nivel animico bajo",Toast.LENGTH_SHORT).show();
             }
-            if (promE <= 1.25){
+            if (promE <= 2){
                 btn_DBI.setVisibility (View.VISIBLE);
                 // dar formulario DBI
                 //esta critico el usuario >;c #noBoobis
@@ -255,7 +256,7 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
                     }
                     saveData();
                     patronEm();
-                    borrarbtnemocion();
+                    //borrarbtnemocion();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
