@@ -87,8 +87,8 @@
         android:layout_below="@id/radio_group"
         android:layout_marginTop="118dp"
         android:background="@drawable/custom_button"
+        android:backgroundTint="#EAECEE"
         android:fontFamily="serif"
-        android:text="Confirm"
-        android:backgroundTint="#EAECEE"/>
+        android:text="Confirm" />
 
 </RelativeLayout>
