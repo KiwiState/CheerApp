@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_margin="@android:dimen/app_icon_size"
         android:layout_weight="1"
         android:alpha="65"
         android:background="@drawable/custom_button"
@@ -26,16 +27,17 @@
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.687"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btn_historial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_margin="@android:dimen/app_icon_size"
         android:layout_weight="1"
         android:alpha="65"
         android:background="@drawable/custom_button"
@@ -44,10 +46,10 @@
         android:text="HISTORIAL"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.687"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.868" />
+        app:layout_constraintVertical_bias="0.887" />
 
     <Button
         android:id="@+id/btn_SafetyN"
@@ -59,13 +61,16 @@
         android:layout_weight="1"
         android:alpha="65"
         android:visibility="gone"
-        android:background="@drawable/custom_button" />
+        android:background="@drawable/custom_button" /><![CDATA[
+
+    >]]>
 
     <Button
         android:id="@+id/btn_Nayudas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_margin="@android:dimen/app_icon_size"
         android:layout_weight="1"
         android:alpha="65"
         android:background="@drawable/custom_button"
@@ -74,10 +79,10 @@
         android:text="AYUDA PROFESIONAL"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.687"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.759" />
+        app:layout_constraintVertical_bias="0.773" />
 
     <Button
         android:id="@+id/btn_DBI_II"
@@ -92,10 +97,11 @@
         android:text="fORMULARIO DE AYUDA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.644" />
+        app:layout_constraintVertical_bias="0.655"
+        android:layout_margin="@android:dimen/app_icon_size"/>
 
     <Button
         android:id="@+id/btn_logout"
