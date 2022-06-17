@@ -51,23 +51,20 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity implements Emocion.EmocionCallback{
     private TextView  txtconsejo;
     private CardView cardcon;
-
     private Button btn_emo;
+
     private Button btn_his;
     ArrayList<String> consejitos;
-    private Button btn_safetyn;
     private Button btn_nayuda;
     private Button btn_DBI;
+
     private ImageView btn_out;
     private TextView txtVNombreSaludo, txtVSaludo;
-    private TextView testview;
-
     private String num = "+11122223333";
-    private String text;
 
+    private String text;
     private String nombre = "Vic";
     private String apellido = "Gan" ;
-
     private int consejo = 0; // si es uno aparecera un popup consejo aleatoreo
     private int DBI = 0;     // si es positivo se le recomendara al usuario buscar ayuda profesional
     private String checkdbi;
@@ -81,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
     Emocion emotion = new Emocion();
     ArrayList<JsonEmotion> ListaE;
 
-    //btn_historial
+    private Integer DBISHOWED = 0;
 
 
     @Override
@@ -215,7 +212,9 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
             }
             if (promE <= 2){
                 btn_DBI.setVisibility (View.VISIBLE);
-
+                if(DBISHOWED == 0){
+                    animationfadeinDBIAlert();
+                }
                 // dar formulario DBI
                 //esta critico el usuario >;c #noBoobis
                 //Toast.makeText(MainActivity.this,"El usuario presenta un nivel animico pauperrimo",Toast.LENGTH_LONG).show();
@@ -516,6 +515,36 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
             txtconsejo.setText("¡Hola! No hemos detectado un nivel grave de depresión aun si necesitas apoyo consulta nuestros números de apoyo.");
         }
 
+        Animation anim = AnimationUtils.loadAnimation(this,R.anim.fadein);
+        cardcon = findViewById(R.id.cartasconsejos);
+        anim.reset();
+        cardcon.clearAnimation();
+        cardcon.startAnimation(anim);
+
+        anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+    }
+
+    private void animationfadeinDBIAlert(){
+        cardcon.setVisibility (View.VISIBLE);
+        cardcon.setAlpha(1);
+        txtconsejo.setText("¡Hola!, hemos detectado que has tenido semanas difíciles. El equipo de Cheer-App te recomienda realizar nuestro \"formulario emocional\" para mejorar el tipo de ayuda.");
+        DBISHOWED = 1;
         Animation anim = AnimationUtils.loadAnimation(this,R.anim.fadein);
         cardcon = findViewById(R.id.cartasconsejos);
         anim.reset();
