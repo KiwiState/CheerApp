@@ -10,6 +10,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.Duration;
 import java.time.Period;
 
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,9 +59,9 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
     private Button btn_safetyn;
     private Button btn_nayuda;
     private Button btn_DBI;
-    private Button btn_out;
+    private ImageView btn_out;
 
-    private TextView testview;
+    private TextView txtVNombreSaludo, txtVSaludo;
 
     private String num = "+11122223333";
     private String text;
@@ -87,14 +89,26 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ListaE = new ArrayList<>();
-        btn_emo = findViewById(R.id.btn_emotion);
+        btn_emo = findViewById(R.id.btnEmocion);
         btn_his = findViewById(R.id.btn_historial);
-        btn_safetyn = findViewById(R.id.btn_SafetyN);
         btn_nayuda = findViewById(R.id.btn_Nayudas);
         btn_DBI = findViewById(R.id.btn_DBI_II);
-        btn_out = findViewById(R.id.btn_logout);
+        btn_out = findViewById(R.id.btnLogout);
+        txtVNombreSaludo = findViewById(R.id.txtVSaludo2);
+        txtVSaludo = findViewById(R.id.txtVSaludo1);
         usuarioLocal = new UsuarioLocal(this);
         ListaE = new ArrayList<>();
+
+        fetchNombre("http://144.22.35.197/fetchNombre.php");
+
+        if(txtVNombreSaludo.getText().toString().equals("null!")){
+            txtVSaludo.setVisibility(View.GONE);
+            txtVNombreSaludo.setVisibility(View.GONE);
+
+        }else{
+            txtVSaludo.setVisibility(View.VISIBLE);
+            txtVNombreSaludo.setVisibility(View.VISIBLE);
+        }
 
         if(!autentificar()){
 
@@ -118,13 +132,13 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
                 startActivity(i);
             }
         });
-        btn_safetyn.setOnClickListener(new View.OnClickListener(){
+        /*btn_safetyn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this,DBIForm.class);
                 startActivity(i);
             }
-        });
+        });*/
         btn_nayuda.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -406,6 +420,38 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
     }
 
 
+    private void fetchNombre(String URL){
+        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                response = response.trim();
+
+                if(!response.equals("")){
+
+                    txtVNombreSaludo.setText(response.toString() + "!");
+                }else{
+                    System.out.println(response);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Usuario usuario = usuarioLocal.getDatosUser();
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("correoNombre", usuario.emailUsuario);
+                return params;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+    }
 
 
 }

@@ -26,21 +26,20 @@ public class MainJournal extends AppCompatActivity {
     private List<JsonEmotion> mList = new ArrayList<>();
     private ListAdapter tAdapter;
     private ListView mListView;
+    private TextView textEmo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        TextView textEmo = (TextView) findViewById(R.id.textEmo);
-        textEmo.setPaintFlags(textEmo.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_journal);
+
+        textEmo = (TextView) findViewById(R.id.textEmo);
         //LvDatos = findViewById(R.id.lvDatos);
         loadData();
         //ArrayAdapter<JsonEmotion> adaptador = new ArrayAdapter<JsonEmotion>(MainJournal.this, android.R.layout.simple_list_item_1,ListaE);
         //LvDatos.setAdapter(adaptador);
 
-
+        textEmo.setPaintFlags(textEmo.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         //Nuevo codigo
         mListView = findViewById(R.id.LV);
 

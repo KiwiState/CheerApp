@@ -1,94 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@color/white"
+    android:background="#FCEAEC"
     tools:context=".DBIForm">
 
-    <TextView
-        android:id="@+id/text_view_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Score: 0"
-        android:textColor="@android:color/black" />
 
-    <TextView
-        android:id="@+id/text_view_question_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/text_view_score"
-        android:text="Question: 1/x"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/text_view_countdown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:text="00:30"
-        android:textColor="@android:color/black"
-        android:textSize="40sp" />
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="391dp"
+        android:layout_height="435dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.388"
+        app:srcCompat="@drawable/custom_button2" />
 
     <TextView
         android:id="@+id/TituloDBI"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/radio_group"
-        android:layout_marginBottom="16dp"
+        android:layout_width="297dp"
+        android:layout_height="77dp"
+        android:layout_marginEnd="15dp"
+        android:fontFamily="serif"
         android:text="Here will be the question text\nHere will be the question text\nHere will be the question text"
         android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:fontFamily="serif"/>
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.575"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.237" />
 
-    <RadioGroup
-        android:id="@+id/radio_group"
+    <RadioButton
+        android:id="@+id/radio_button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true">
+        android:fontFamily="serif"
+        android:text="Option 1"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.177"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.439" />
 
-        <RadioButton
-            android:id="@+id/radio_button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Option 1"
-            android:fontFamily="serif"/>
+    <RadioButton
+        android:id="@+id/radio_button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text="Option 4"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/radio_button3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.658" />
 
-        <RadioButton
-            android:id="@+id/radio_button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Option 2"
-            android:fontFamily="serif"/>
+    <RadioButton
+        android:id="@+id/radio_button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text="Option 3"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/radio_button2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.583" />
 
-        <RadioButton
-            android:id="@+id/radio_button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Option 3"
-            android:fontFamily="serif"/>
-        <RadioButton
-            android:id="@+id/radio_button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Option 4"
-            android:fontFamily="serif"/>
-
-    </RadioGroup>
+    <RadioButton
+        android:id="@+id/radio_button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text="Option 2"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/radio_button1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.513" />
 
     <Button
         android:id="@+id/button_confirm_next"
-        android:layout_width="match_parent"
+        android:layout_width="379dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/radio_group"
-        android:layout_marginTop="118dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/custom_button"
         android:backgroundTint="#EAECEE"
         android:fontFamily="serif"
-        android:text="Confirm" />
+        android:text="Confirm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

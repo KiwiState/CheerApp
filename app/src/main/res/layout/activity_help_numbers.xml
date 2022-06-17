@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#FCEAEC"
     android:orientation="vertical"
     tools:context=".HelpNumbers">
 
@@ -15,24 +14,25 @@
         android:layout_width="393dp"
         android:layout_height="45dp"
         android:layout_alignParentEnd="true"
+        android:layout_marginStart="15dp"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="143dp"
         android:layout_marginRight="100dp"
-        android:layout_marginBottom="10dp"
 
+        android:layout_marginBottom="10dp"
         android:fontFamily="serif"
         android:text="CONTACTOS DE AYUDA"
+        android:textColor="#9E000000"
         android:textSize="24dp"
         android:textStyle="bold" />
 
 
     <ListView
-        android:layout_marginTop = "20dp"
         android:id="@+id/HNBS"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:layout_marginTop="20dp">
 
     </ListView>
 

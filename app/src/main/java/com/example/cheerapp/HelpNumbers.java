@@ -21,12 +21,11 @@ public class HelpNumbers extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_help_numbers);
 
         TextView textAyu = (TextView) findViewById(R.id.textAyu);
         textAyu.setPaintFlags(textAyu.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_help_numbers);
         HelpBD();
         //Nuevo codigo
         mListView = findViewById(R.id.HNBS);
