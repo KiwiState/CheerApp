@@ -4,12 +4,20 @@ public class JsonHelp {
     private String titulo;
     private String contacto;
     private String descripcion;
+    private String URL;
 
-    public JsonHelp(String titulo, String contacto, String descripcion) {
+
+
+    public JsonHelp(String titulo, String contacto, String descripcion, String URL) {
         this.titulo = titulo;
         this.contacto = contacto;
         this.descripcion = descripcion;
+        this.URL = URL;
     }
+
+    public String getURL() { return URL;}
+
+    public void setURL(String URL) {this.URL = URL;}
 
     public String getTitulo() {
         return titulo;

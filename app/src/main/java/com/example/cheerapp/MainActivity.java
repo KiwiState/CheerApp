@@ -22,6 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.Duration;
 import java.time.Period;
 
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,16 +58,12 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
     private Button btn_safetyn;
     private Button btn_nayuda;
     private Button btn_DBI;
-    private Button btn_out;
-
+    private ImageView btn_out;
+    private TextView txtVNombreSaludo, txtVSaludo;
     private TextView testview;
 
     private String num = "+11122223333";
     private String text;
-
-    private TextView txtcont;
-    private TextView txttestdbi;
-
 
     private String nombre = "Vic";
     private String apellido = "Gan" ;
@@ -94,18 +91,16 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
         ListaE = new ArrayList<>();
         btn_emo = findViewById(R.id.btn_emotion);
         btn_his = findViewById(R.id.btn_historial);
-        btn_safetyn = findViewById(R.id.btn_SafetyN);
+       // btn_safetyn = findViewById(R.id.btn_SafetyN);
         btn_nayuda = findViewById(R.id.btn_Nayudas);
         btn_DBI = findViewById(R.id.btn_DBI_II);
         btn_out = findViewById(R.id.btn_logout);
         cardcon = findViewById(R.id.cartasconsejos);
         txtconsejo = findViewById(R.id.consejo_id);
+        txtVNombreSaludo = findViewById(R.id.txtVSaludo2);
+        txtVSaludo = findViewById(R.id.txtVSaludo1);
 
-        txtcont = findViewById(R.id.contactotextm);
-        txttestdbi = findViewById(R.id.txttestdbi);
-
-
-        Toast.makeText(MainActivity.this,"Bienvenido!",Toast.LENGTH_SHORT).show();
+        fetchNombre("http://144.22.35.197/fetchNombre.php");
 
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -127,8 +122,15 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
         btn_emo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,MainForm.class);
-                startActivity(i);
+
+
+                if(btn_emo.getAlpha() != 1){
+                    Toast.makeText(MainActivity.this, "La emoción de este día ya fue registrada", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent i = new Intent(MainActivity.this,MainForm.class);
+                    startActivity(i);
+                }
+
             }
         });
         btn_his.setOnClickListener(new View.OnClickListener(){
@@ -138,13 +140,7 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
                 startActivity(i);
             }
         });
-        btn_safetyn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,DBIForm.class);
-                startActivity(i);
-            }
-        });
+
         btn_nayuda.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -213,13 +209,13 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
                 //dar consejos y numeros de ayuda
                 //esta animicamente el mal usuario :
                 btn_nayuda.setVisibility (View.VISIBLE);
-                txtcont.setVisibility (View.VISIBLE);
+
 
                 //Toast.makeText(MainActivity.this,"El usuario presenta un nivel animico bajo",Toast.LENGTH_SHORT).show();
             }
             if (promE <= 2){
                 btn_DBI.setVisibility (View.VISIBLE);
-                txttestdbi.setVisibility (View.VISIBLE);
+
                 // dar formulario DBI
                 //esta critico el usuario >;c #noBoobis
                 //Toast.makeText(MainActivity.this,"El usuario presenta un nivel animico pauperrimo",Toast.LENGTH_LONG).show();
@@ -359,7 +355,9 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
             if(days >= 1) {
                 //dia es mayor a uno
             } else {
-                btn_emo.setVisibility(View.GONE);
+
+                btn_emo.setAlpha(0.25f);
+
             }
 
 
@@ -543,4 +541,36 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
 
     }
 
+    private void fetchNombre(String URL){
+        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                response = response.trim();
+
+                if(!response.equals("")){
+
+                    txtVNombreSaludo.setText(response.toString() + "!");
+                }else{
+                    System.out.println(response);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Usuario usuario = usuarioLocal.getDatosUser();
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("correoNombre", usuario.emailUsuario);
+                return params;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+    }
 }
