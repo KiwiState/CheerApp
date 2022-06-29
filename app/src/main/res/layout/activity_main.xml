@@ -12,16 +12,15 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="359dp"
-        android:layout_height="576dp"
+        android:layout_width="363dp"
+        android:layout_height="538dp"
         android:outlineAmbientShadowColor="@color/black"
         android:outlineSpotShadowColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.436"
+        app:layout_constraintVertical_bias="0.414"
         app:srcCompat="@drawable/custom_button2" />
 
     <pl.droidsonroids.gif.GifImageView
@@ -42,7 +41,7 @@
         android:layout_height="48dp"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="23dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="21dp"
         android:layout_weight="1"
         android:alpha="65"
@@ -52,7 +51,7 @@
         android:text="Tu historial emocional"
         android:textColor="#382B50"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/btn_DBI_II" />
 
@@ -107,8 +106,8 @@
 
     <ImageView
         android:id="@+id/btn_logout"
-        android:layout_width="56dp"
-        android:layout_height="57dp"
+        android:layout_width="47dp"
+        android:layout_height="47dp"
         android:adjustViewBounds="true"
         android:background="@drawable/custom_button"
         android:backgroundTint="#B388FF"
