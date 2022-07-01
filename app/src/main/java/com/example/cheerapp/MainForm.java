@@ -161,19 +161,19 @@ public class MainForm extends AppCompatActivity {
                 response=response.trim();
                 if(response.equals("EMOCION INSERTADA")){
 
-                    Toast.makeText(MainForm.this, "EMOCION INSERTADA CON ÉXITO", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainForm.this, "EMOCION INSERTADA CON ÉXITO", Toast.LENGTH_SHORT).show();
                     passactivity();
 
                 }else{
 
-                    Toast.makeText(MainForm.this, "ERROR EN LA INSERCIÓN", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainForm.this, "ERROR EN LA INSERCIÓN", Toast.LENGTH_SHORT).show();
 
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainForm.this, error.toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainForm.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         }){
             @Nullable
@@ -212,7 +212,7 @@ public class MainForm extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(MainForm.this, error.toString(), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(MainForm.this, error.toString(), Toast.LENGTH_SHORT).show();
 
             }
         }) {

@@ -252,11 +252,17 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("emociones");
                     for (int i = 0; i <jsonArray.length(); i++){
+                        String desc;
                         JSONObject object = jsonArray.getJSONObject(i);
                         String name = object.getString("NOMBRE");
                         String lastn = object.getString("APELLIDO");
                         String state = object.getString("ESTADO");
-                        String desc = object.getString("DESCRIPCION_ESTADO");
+                        if(object.getString("DESCRIPCION_ESTADO").equals("null")){
+                            desc = "";
+                        }else{
+                            desc = object.getString("DESCRIPCION_ESTADO");
+                        }
+
                         String ddate = object.getString("FECHA");
                         float f = Float.valueOf(state);
                         ListaE.add(new JsonEmotion(desc, f, ddate));
