@@ -12,8 +12,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="362dp"
-        android:layout_height="504dp"
+        android:layout_width="359dp"
+        android:layout_height="566dp"
         android:outlineAmbientShadowColor="@color/black"
         android:outlineSpotShadowColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -146,7 +146,11 @@
         app:layout_constraintHorizontal_bias="0.219"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="@+id/imageView2"
+<<<<<<< HEAD
         app:layout_constraintVertical_bias="0.0" />
+=======
+        app:layout_constraintVertical_bias="1.0" />
+>>>>>>> 25b83387eb8b00e0657e0b0e190848f9c625cbac
 
     <TextView
         android:id="@+id/txtVSaludo2"
@@ -156,9 +160,16 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
+<<<<<<< HEAD
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.021" />
+=======
+        app:layout_constraintHorizontal_bias="0.724"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="1.0" />
+>>>>>>> 25b83387eb8b00e0657e0b0e190848f9c625cbac
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cartasconsejos"
