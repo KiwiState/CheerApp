@@ -163,7 +163,7 @@ public class DBIForm extends AppCompatActivity {
         TPreguntas.add(new PreguntasDBI("Pérdida de Energía", "Tengo tanta energía como siempre.", "Tengo menos energía que la que solía tener.","No tengo suficiente energía para hacer\n" +
                 "demasiado.","No tengo energía suficiente para hacer nada."));
 
-        TPreguntas.add(new PreguntasDBI("Cambios en los Hábitos de Sueño", "No he experimentado ningún cambio en mis\n" +
+        TPreguntas.add(new PreguntasDBI("Hábitos de Sueño", "No he experimentado ningún cambio en mis\n" +
                 "hábitos de sueño.", "Duermo un poco más/menos que lo habitual.","Duermo mucho más/menos que lo habitual.","Duermo la mayor parte del día/Duermo casi una hora al dia."));
 
         TPreguntas.add(new PreguntasDBI("Irritabilidad", "No estoy más irritable que lo habitual.", "Estoy más irritable que lo habitual.","Estoy mucho más irritable que lo habitual.","Estoy irritable todo el tiempo."));
@@ -180,7 +180,7 @@ public class DBIForm extends AppCompatActivity {
                 "muchas de las cosas que solía hacer.","Estoy demasiado fatigado o cansado para hacer\n" +
                 "la mayoría de las cosas que solía hacer."));
 
-        TPreguntas.add(new PreguntasDBI("Pérdida de Interés en el Sexo", "No he notado ningún cambio reciente en mi\n" +
+        TPreguntas.add(new PreguntasDBI("Interés en el Sexo", "No he notado ningún cambio reciente en mi\n" +
                 "interés por el sexo", "Estoy menos interesado por el sexo de lo que\n" +
                 "solía estarlo.","Ahora estoy mucho menos interesado en el sexo.","He perdido completamente el interés en el sexo."));
     }

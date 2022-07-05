@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
             }
             if (promE <= 2){
                 btn_DBI.setVisibility (View.VISIBLE);
-                if(DBISHOWED == 0){
+                if(DBISHOWED == 0 && DBI == 0){
                     animationfadeinDBIAlert();
                 }
                 // dar formulario DBI
@@ -388,7 +388,7 @@ public class MainActivity extends AppCompatActivity implements Emocion.EmocionCa
             text = "Somos Cheer-App, le comentamos que su amigo "+ nombre+ " " + apellido +" lo ha registrado como su número de confianza.\n" +
                     "En estos momentos "+ nombre+ " " + apellido +" no se encuentra emocionalmente bien, le sugerimos que hable con él.";
             //showDialog();
-            animationfadeinDBI(DBI);
+            //animationfadeinDBI(DBI);
             if(DBI == 2){
                 sendhelp();
             }
