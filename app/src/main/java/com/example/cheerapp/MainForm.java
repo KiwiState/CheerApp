@@ -2,6 +2,8 @@ package com.example.cheerapp;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.time.LocalDateTime;
 import java.time.Period;
 import android.app.Dialog;
 import android.content.Intent;
@@ -167,6 +169,7 @@ public class MainForm extends AppCompatActivity {
                 }else{
 
                     Toast.makeText(MainForm.this, "ERROR EN LA INSERCIÓN", Toast.LENGTH_SHORT).show();
+                    System.out.println(response);
 
                 }
             }
@@ -179,6 +182,9 @@ public class MainForm extends AppCompatActivity {
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
+                DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MMMM/yy");
+                LocalDateTime fecha = LocalDateTime.now();
+                //System.out.println(formatoFecha.format(fecha));
                 Usuario usuario = usuarioLocal.getDatosUser();
                 Map<String, String> params = new HashMap<String, String>();
                // float f = ratingBar.getRating();
@@ -187,6 +193,7 @@ public class MainForm extends AppCompatActivity {
                 params.put("dscpEstado", mEditText.getText().toString());
                 params.put("numeroInsertEmocion", numeroUser);
                 params.put("correoInsertEmocion", usuario.emailUsuario);
+                params.put("fechaInsertEmocion", formatoFecha.format(fecha));
                 return params;
             }
         };
