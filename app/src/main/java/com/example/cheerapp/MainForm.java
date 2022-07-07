@@ -3,6 +3,7 @@ package com.example.cheerapp;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.Period;
 import android.app.Dialog;
@@ -43,6 +44,8 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +82,7 @@ public class MainForm extends AppCompatActivity {
         smileyRating.setTitle(SmileyRating.Type.OKAY,"Okay");
         smileyRating.setTitle(SmileyRating.Type.GOOD,"Bien");
         smileyRating.setTitle(SmileyRating.Type.GREAT,"Genial");
+        
 
 
 
@@ -163,13 +167,12 @@ public class MainForm extends AppCompatActivity {
                 response=response.trim();
                 if(response.equals("EMOCION INSERTADA")){
 
-                    Toast.makeText(MainForm.this, "EMOCION INSERTADA CON ÉXITO", Toast.LENGTH_SHORT).show();
                     passactivity();
 
                 }else{
 
-                    Toast.makeText(MainForm.this, "ERROR EN LA INSERCIÓN", Toast.LENGTH_SHORT).show();
-                    System.out.println(response);
+                    Toast.makeText(MainForm.this, "OCURRIÓ UN ERROR", Toast.LENGTH_SHORT).show();
+
 
                 }
             }
@@ -182,9 +185,8 @@ public class MainForm extends AppCompatActivity {
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MMMM/yy");
-                LocalDateTime fecha = LocalDateTime.now();
-                //System.out.println(formatoFecha.format(fecha));
+                SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yy");
+                Date fecha = Calendar.getInstance().getTime();
                 Usuario usuario = usuarioLocal.getDatosUser();
                 Map<String, String> params = new HashMap<String, String>();
                // float f = ratingBar.getRating();
