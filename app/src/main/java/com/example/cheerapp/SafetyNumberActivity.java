@@ -65,7 +65,7 @@ public class SafetyNumberActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 fetchNumeroUser("http://144.22.35.197/fetchNumero.php");
-                agregarSN("http://144.22.35.197/addSN.php");
+
             }
         });
 
@@ -124,6 +124,7 @@ public class SafetyNumberActivity extends AppCompatActivity {
 
                 response = response.trim();
                 numeroUser=response;
+                agregarSN("http://144.22.35.197/addSN.php");
 
             }
         }, new Response.ErrorListener() {

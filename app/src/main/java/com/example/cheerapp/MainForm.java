@@ -82,7 +82,7 @@ public class MainForm extends AppCompatActivity {
         smileyRating.setTitle(SmileyRating.Type.OKAY,"Okay");
         smileyRating.setTitle(SmileyRating.Type.GOOD,"Bien");
         smileyRating.setTitle(SmileyRating.Type.GREAT,"Genial");
-        
+
 
 
 
